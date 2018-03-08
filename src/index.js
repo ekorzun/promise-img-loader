@@ -9,8 +9,8 @@ const IMG_EVENTS = ['onload', 'onabort', 'onerror']
 const noop = () => { }
 
 const isOptions = opts => (
-  opts && typeof opts === 'object' 
-    && (opts.hasOwnProperty('timeout') || opts.hasOwnProperty('onProgress'))
+  opts && typeof opts === 'object' &&
+    (opts.hasOwnProperty('timeout') || opts.hasOwnProperty('onProgress'))
 )
 
 const isValid = (img) =>
@@ -55,7 +55,7 @@ const registerHandlers = (img, resolve, reject, timeout) => {
 }
 
 
-const asyncImg = (imgsrc, { timeout = 0, onProgress = noop }, total, img) => {
+const asyncImg = (imgsrc, {timeout = 0}, total, img) => {
   if (!imgsrc) {
     return Promise.reject(getState(imgsrc, new Error('Image can not be empty')))
   }

@@ -8,13 +8,11 @@
     "sourceType": "module"
   },
   "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended"
+    "eslint:recommended"
   ],
   "parser": "babel-eslint",
   "plugins": [
-    "babel",
-    "react"
+    "babel"
   ],
   "rules": {
     "no-console": "off",
@@ -71,20 +69,11 @@
         "args": "none"
       }
     ],
-    "no-debugger": "warn",
-    "react/jsx-indent": [
-      "error",
-      2
-    ],
-    "react/prop-types": [
-      0,
-      {}
-    ],
-    "react/react-in-jsx-scope": 0,
-    "react/display-name": "off",
-    "react/no-find-dom-node": "off"
+    "no-debugger": "warn"
   },
   "globals": {
-    "window": false
+    "window": false,
+    "describe": false,
+    "it": false
   }
 }

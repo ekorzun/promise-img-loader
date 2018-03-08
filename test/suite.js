@@ -9,10 +9,10 @@ const img404 = 'https://images.pexels.com/'
 
 require('browser-env')(['window', 'document', 'Image', 'HTMLImageElement', 'HTMLCollection', 'NodeList'], {
   resources: 'usable',
-});
+})
 
 // 404 img hack for browser env
-console.oldError = console.error;
+console.oldError = console.error
 console.error = function (args) {
   if (args.indexOf('Could not load img') > -1) { return false }
   console.oldError.apply(console, arguments)
@@ -98,7 +98,7 @@ describe(`Hello, world :)`, () => {
   })
 
   it(`should load several images from DOM (NodeList)`, () => {
-    const imgs = [img1, img2, img3].map((i, index) => {
+    [img1, img2, img3].map((i, index) => {
       const img = document.createElement('img')
       img.id = `i${index}`
       document.body.appendChild(img)
@@ -110,7 +110,7 @@ describe(`Hello, world :)`, () => {
   })
 
   it(`should load several images from DOM (HTMLCollection)`, () => {
-    const imgs = [img1, img2, img3].map((i, index) => {
+    [img1, img2, img3].map((i, index) => {
       const img = document.createElement('img')
       img.id = `img${index}`
       img.classList.add('img')
@@ -130,10 +130,10 @@ describe(`Hello, world :)`, () => {
 
   it(`should load any type of arguments`, () => {
     return loadImages(
-      img1,                               // 1
-      [img2, img3],                       // 2
-      document.querySelector('#i1'),      // 1
-      document.querySelectorAll('.img'),  // 3
+      img1, // 1
+      [img2, img3], // 2
+      document.querySelector('#i1'), // 1
+      document.querySelectorAll('.img'), // 3
     ).then(results => {
       assert.equal(results.length, 7)
     })
@@ -142,10 +142,10 @@ describe(`Hello, world :)`, () => {
 
   it(`should load any type of arguments (with 404 and invalid)`, () => {
     return loadImages(
-      img1,                               // 1
-      [img2, img3],                       // 2
-      document.querySelector('#i1'),      // 1
-      document.querySelectorAll('.img'),  // 3
+      img1, // 1
+      [img2, img3], // 2
+      document.querySelector('#i1'), // 1
+      document.querySelectorAll('.img'), // 3
       [img404, null],
       123123123,
       false,
@@ -178,16 +178,16 @@ describe(`Hello, world :)`, () => {
       onProgress: (processed, total, res) => {
         // window.console.log('Processed: ', Math.round(processed/total*100), '%', res && res.state)
         assert.equal(processed, counter++)
-      }
+      },
     },
-      img1,                               // 1
-      [img2, img3],                       // 2
-      document.querySelector('#i1'),      // 1
-      document.querySelectorAll('.img'),  // 3
-      [img404, null],
-      123123123,
-      false,
-      true,
+    img1, // 1
+    [img2, img3], // 2
+    document.querySelector('#i1'), // 1
+    document.querySelectorAll('.img'), // 3
+    [img404, null],
+    123123123,
+    false,
+    true,
     ).catch(({ loaded, invalid }) => {
       assert.equal(loaded.length, 7)
       assert.equal(invalid.length, 5)

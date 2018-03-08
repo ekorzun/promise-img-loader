@@ -35,7 +35,7 @@ imgsLoaded('image1.jpg')
 })
 ```
 ### Reject
-It fails with rejection when at least one of the images isn't loaded.
+It returns rejection when at least one of the images hasn't been loaded.
 ```js
 imgsLoaded('image1.jpg', '//example.com/404', null)
 .catch(({loaded, invalid}) => {

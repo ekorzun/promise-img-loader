@@ -1,8 +1,8 @@
 {
   "name": "promise-img-loader",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Promise-based async image loader",
-  "main": "index.js",
+  "main": "build/index.js",
   "repository": "https://github.com/ekorzun/promise-img-loader.git",
   "author": "Evgeny Korzun",
   "license": "WTFPL",
@@ -10,7 +10,6 @@
   "scripts": {
     "prebuild": "rm -rf build && mkdir build",
     "build": "babel src/index.js --out-file=build/index.js",
-    "prepublish": "build",
     "test": "mocha ./test/suite.js"
   },
   "devDependencies": {

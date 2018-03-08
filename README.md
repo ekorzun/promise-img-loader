@@ -67,6 +67,11 @@ imgsLoaded({
     }
 }, 'image1.jpg', 'VERY_LARGE_IMAGE.jpg', '/404')
 .catch(({loaded, invalid}) => {
+    console.log(invalid)
+    // [
+    // {img: '//example.com/404', state: "failed"},
+    // {img: 'VERY_LARGE_IMAGE.jpg', state: "timeout_failed"}
+    // ]
     return loaded
 })
 .then(results => {
@@ -76,6 +81,12 @@ imgsLoaded({
 })
 ```
 
+## Test & Development
+```
+git clone https://github.com/ekorzun/promise-img-loader.git
+yarn install
+yarn test
+```
 
 
 

@@ -1,0 +1,32 @@
+{
+  "name": "promise-img-loader",
+  "version": "1.0.0",
+  "description": "Promise-based async image loader",
+  "main": "index.js",
+  "repository": "https://github.com/ekorzun/promise-img-loader.git",
+  "author": "Evgeny Korzun",
+  "license": "WTFPL",
+  "private": false,
+  "scripts": {
+    "prebuild": "rm -rf build && mkdir build",
+    "build": "babel src/index.js --out-file=build/index.js",
+    "prepublish": "build",
+    "test": "mocha ./test/suite.js"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "browser-env": "^3.2.5",
+    "canvas-prebuilt": "^1.6.5-prerelease.1",
+    "jquery": "^3.3.1",
+    "jsdom": "^11.6.2",
+    "mocha": "^5.0.4",
+    "mocha-clean": "^1.0.0"
+  },
+  "babel": {
+    "presets": [
+      "stage-2"
+    ]
+  }
+}

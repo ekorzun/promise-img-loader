@@ -1,0 +1,90 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "parser": "babel-eslint",
+  "plugins": [
+    "babel",
+    "react"
+  ],
+  "rules": {
+    "no-console": "off",
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "quotes": [
+      "error",
+      "single",
+      {
+        "allowTemplateLiterals": true
+      }
+    ],
+    "semi": [
+      "error",
+      "never"
+    ],
+    "no-trailing-spaces": "error",
+    "brace-style": [
+      "error",
+      "1tbs",
+      {
+        "allowSingleLine": true
+      }
+    ],
+    "comma-dangle": [
+      "error",
+      "always-multiline"
+    ],
+    "dot-location": [
+      "error",
+      "property"
+    ],
+    "no-multi-spaces": "error",
+    "space-before-blocks": "error",
+    "no-multiple-empty-lines": "error",
+    "no-empty": [
+      "error",
+      {
+        "allowEmptyCatch": true
+      }
+    ],
+    "no-extra-semi": "error",
+    "no-case-declarations": "error",
+    "no-unreachable": "error",
+    "no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "args": "none"
+      }
+    ],
+    "no-debugger": "warn",
+    "react/jsx-indent": [
+      "error",
+      2
+    ],
+    "react/prop-types": [
+      0,
+      {}
+    ],
+    "react/react-in-jsx-scope": 0,
+    "react/display-name": "off",
+    "react/no-find-dom-node": "off"
+  },
+  "globals": {
+    "window": false
+  }
+}

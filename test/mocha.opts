@@ -1,0 +1,2 @@
+-r babel-core/register
+-r mocha-clean

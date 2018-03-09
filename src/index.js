@@ -4,13 +4,13 @@ const STATE_BROKEN = 'broken'
 const STATE_FAILED = 'failed'
 const STATE_INVALID = 'invalid'
 const STATE_FAILED_TIMEOUT = 'timeout_failed'
-const IMG_EVENTS = ['onload', 'onabort', 'onerror']
+const IMG_EVENTS = ['load', 'abort', 'error']
 
 const noop = () => { }
 
 const isOptions = opts => (
   opts && typeof opts === 'object' &&
-    (opts.hasOwnProperty('timeout') || opts.hasOwnProperty('onProgress'))
+  (opts.hasOwnProperty('timeout') || opts.hasOwnProperty('onProgress'))
 )
 
 const isValid = (img) =>
@@ -47,15 +47,14 @@ const registerHandlers = (img, resolve, reject, timeout) => {
       reject(getState(img, STATE_FAILED))
     }
     IMG_EVENTS.forEach(ev => {
-      img[ev] = null
-      delete img[ev]
+      img.removeEventListener(ev, callback)
     })
   }
-  IMG_EVENTS.forEach(ev => { img[ev] = callback })
+  IMG_EVENTS.forEach(ev => { img.addEventListener(ev, callback) })
 }
 
 
-const asyncImg = (imgsrc, {timeout = 0}, total, img) => {
+const asyncImg = (imgsrc, { timeout = 0 }, total, img) => {
   if (!imgsrc) {
     return Promise.reject(getState(imgsrc, new Error('Image can not be empty')))
   }

@@ -11,7 +11,7 @@ var STATE_BROKEN = 'broken';
 var STATE_FAILED = 'failed';
 var STATE_INVALID = 'invalid';
 var STATE_FAILED_TIMEOUT = 'timeout_failed';
-var IMG_EVENTS = ['onload', 'onabort', 'onerror'];
+var IMG_EVENTS = ['load', 'abort', 'error'];
 
 var noop = function noop() {};
 
@@ -21,6 +21,10 @@ var isOptions = function isOptions(opts) {
 
 var isValid = function isValid(img) {
   return img && img.naturalHeight && img.naturalWidth;
+};
+
+var isBroken = function isBroken(img) {
+  return img && img.complete && img.src && !(img.naturalHeight || img.naturalWidth);
 };
 
 var getState = function getState(img, state) {
@@ -43,26 +47,23 @@ var registerHandlers = function registerHandlers(img, resolve, reject, timeout) 
     window.clearTimeout(timer);
     if (isValid(img)) {
       resolve(getState(img, STATE_OK));
-    } else if (img.complete && img.src) {
+    } else if (isBroken(img)) {
       reject(getState(img, STATE_BROKEN));
     } else {
       reject(getState(img, STATE_FAILED));
     }
     IMG_EVENTS.forEach(function (ev) {
-      img[ev] = null;
-      delete img[ev];
+      img.removeEventListener(ev, callback);
     });
   };
   IMG_EVENTS.forEach(function (ev) {
-    img[ev] = callback;
+    img.addEventListener(ev, callback);
   });
 };
 
 var asyncImg = function asyncImg(imgsrc, _ref, total, img) {
   var _ref$timeout = _ref.timeout,
-      timeout = _ref$timeout === undefined ? 0 : _ref$timeout,
-      _ref$onProgress = _ref.onProgress,
-      onProgress = _ref$onProgress === undefined ? noop : _ref$onProgress;
+      timeout = _ref$timeout === undefined ? 0 : _ref$timeout;
 
   if (!imgsrc) {
     return Promise.reject(getState(imgsrc, new Error('Image can not be empty')));
@@ -81,7 +82,7 @@ var asyncImg = function asyncImg(imgsrc, _ref, total, img) {
     if (isValid(img)) {
       return resolve(getState(img, STATE_OK));
     }
-    if (img.complete && img.src) {
+    if (isBroken(img)) {
       return reject(getState(img, STATE_BROKEN));
     }
     registerHandlers(img || imgsrc, resolve, reject, timeout);
